@@ -12,21 +12,14 @@
         :span="15"
         class="center">
         <div class="wrapper">
-          <el-input placeholder="搜索商家或地点"></el-input>
-          <button class="el-button el-button-primary"><i class="el-icon-search"></i></button>
-          <dl class="hotPlace">
+          <el-input v-model="search" placeholder="搜索商家或地点" @focus="focus" @blur="blur" @input="input"></el-input>
+          <button class="el-button el-button--primary"><i class="el-icon-search"></i></button>
+          <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
+            <dd v-for="(item,idx) in hotPlace" :key="idx">{{item}}</dd>
           </dl>
-          <dl class="searchList">
-            <dd>麻辣香锅</dd>
-            <dd>麻辣香锅</dd>
-            <dd>麻辣香锅</dd>
-            <dd>麻辣香锅</dd>
+          <dl class="searchList" v-if="isSearchList">
+            <dd v-for="(item,idx) in searchList" :key="idx">{{item}}</dd>
           </dl>
         </div>
         <p class="suggset">
@@ -36,6 +29,23 @@
           <a href="#">故宫博物院</a>
           <a href="#">故宫博物院</a>
         </p>
+        <ul class="nav">
+          <li>
+            <nuxt-link to="/" class="takeout">美团外卖</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/movie" class="takeout">猫眼电影</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/hotel" class="takeout">美团酒店</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/apartment" class="takeout">名宿公寓</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link to="/business" class="takeout">商家入驻</nuxt-link>
+          </li>
+        </ul>
       </el-col>
       <el-col
         :span="6"
@@ -54,7 +64,38 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      search: '',
+      isFocus: false,
+      hotPlace: ['火锅', '火锅', '火锅'],
+      searchList: ['故宫', '故宫', '故宫']
+    }
+  },
+  computed: {
+    isHotPlace: function () {
+      return this.isFocus && !this.search
+    },
+    isSearchList: function () {
+      return this.isFocus && this.search
+    }
+  },
+  methods: {
+    focus: function () {
+      this.isFocus = true
+    },
+    blur: function () {
+      let self = this
+      setTimeout(function () {
+        self.isFocus = false
+      }, 200)
+    },
+    input:function () {
+      console.log('input')
+    }
+  }
+}
 </script>
 
 <style lang="css">
