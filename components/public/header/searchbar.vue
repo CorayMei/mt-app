@@ -11,6 +11,31 @@
       <el-col
         :span="15"
         class="center">
+        <div class="wrapper">
+          <el-input placeholder="搜索商家或地点"></el-input>
+          <button class="el-button el-button-primary"><i class="el-icon-search"></i></button>
+          <dl class="hotPlace">
+            <dt>热门搜索</dt>
+            <dd>火锅</dd>
+            <dd>火锅</dd>
+            <dd>火锅</dd>
+            <dd>火锅</dd>
+            <dd>火锅</dd>
+          </dl>
+          <dl class="searchList">
+            <dd>麻辣香锅</dd>
+            <dd>麻辣香锅</dd>
+            <dd>麻辣香锅</dd>
+            <dd>麻辣香锅</dd>
+          </dl>
+        </div>
+        <p class="suggset">
+          <a href="#">故宫博物院</a>
+          <a href="#">故宫博物院</a>
+          <a href="#">故宫博物院</a>
+          <a href="#">故宫博物院</a>
+          <a href="#">故宫博物院</a>
+        </p>
       </el-col>
       <el-col
         :span="6"
