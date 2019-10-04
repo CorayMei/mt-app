@@ -107,12 +107,12 @@ router.post('/signin', async (ctx, next) => {
   })(ctx, next)
 })
 router.post('/verify', async (ctx, next) => {
-  let username = ctx.require.body.username
+  let username = ctx.request.body.username
   const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
-  if (saveExpire && new Datee().getTime() - saveExpire < 0) {
+  if (saveExpire && new Date().getTime() - saveExpire < 0) {
     ctx.body = {
       code: -1,
-      msg: '验证请求过于频繁，1分钟内一次'
+      msg: '验证请求过于频繁，1分钟后再试'
     }
     return false
   }
@@ -134,8 +134,8 @@ router.post('/verify', async (ctx, next) => {
   let mailOptions = {
     from: `"认证邮件"<${Email.smtp.user}>`,
     to: ko.email,
-    subject: '实战注册码',
-    html: '您在实战中注册，注册码是${ko.code}'
+    subject: '高仿MT实战验证码',
+    html: `您在高仿MT实战中注册，验证码是${ko.code}`
   }
   await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

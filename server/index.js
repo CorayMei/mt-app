@@ -58,7 +58,7 @@ async function start () {
   } else {
     await nuxt.ready()
   }
-  app.use(users.routes()).use(user.allowedMethods())
+  app.use(users.routes()).use(users.allowedMethods())
   app.use((ctx) => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
